@@ -23,7 +23,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void JoinRoom()
     {
-        PhotonNetwork.JoinRoom(_nameCreateRoom.text);
+        PhotonNetwork.JoinRoom(_nameJoinRoom.text);
     }
 
     public override void OnJoinedRoom()
