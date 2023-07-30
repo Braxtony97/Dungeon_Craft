@@ -108,6 +108,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 3928809069855419648}
+  - {fileID: 8065414797894761823}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -140,6 +141,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _photonView: {fileID: 5027970429764831184}
+  _spriteRenderer: {fileID: 1556318141437168925}
+  _otherPlayerSprite: {fileID: 21300536, guid: 872dba149c5addb49ac3649c5b9247d6, type: 3}
 --- !u!114 &5211867749327414155
 MonoBehaviour:
   m_ObjectHideFlags: 0
