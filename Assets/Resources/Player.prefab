@@ -110,6 +110,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 3928809069855419648}
+  - {fileID: 8065414797894761823}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -141,6 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f29c8caba641f78418792d624ad8aeca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ControlTypeValue: 0
   _photonView: {fileID: 5027970429764831184}
   _spriteRenderer: {fileID: 1556318141437168925}
   _otherPlayerSprite: {fileID: 21300536, guid: 872dba149c5addb49ac3649c5b9247d6, type: 3}
@@ -176,8 +178,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5884652e3e33e04eb4370844ae5d7fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rigidbody: {fileID: 8202264323383051763}
-  _joystick: {fileID: 0}
+  DirectionLook: 0
+  Joystick: {fileID: 0}
+  _rigidbodyPlayer: {fileID: 8202264323383051763}
   _spriteRenderer: {fileID: 1556318141437168925}
 --- !u!50 &8202264323383051763
 Rigidbody2D:
