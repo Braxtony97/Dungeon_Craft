@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 5211867749327414155}
   - component: {fileID: 1021980412672635892}
   - component: {fileID: 8202264323383051763}
+  - component: {fileID: 5532095800434480580}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -180,7 +181,9 @@ MonoBehaviour:
   _otherPlayerSprite: {fileID: 21300536, guid: 872dba149c5addb49ac3649c5b9247d6, type: 3}
   _rigidbody: {fileID: 8202264323383051763}
   _moveBehaviour: {fileID: 1021980412672635892}
-  _pointer: {fileID: 3783321291670419250}
+  _weaponBehaviour: {fileID: 8133321514067668430}
+  _shootBehaviour: {fileID: 5532095800434480580}
+  _timeReloadShot: 0.4
 --- !u!114 &5211867749327414155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,7 +215,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DirectionLook: 0
-  Joystick: {fileID: 0}
   _rigidbodyPlayer: {fileID: 8202264323383051763}
   _spriteRenderer: {fileID: 1556318141437168925}
 --- !u!50 &8202264323383051763
@@ -236,6 +238,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &5532095800434480580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1556318141437168926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53186d26c067153448757b1b18dbfdf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pointer: {fileID: 3783321291670419250}
 --- !u!1 &6755191283733941483
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,3 +350,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _offset: -90
+  _joystick: {fileID: 0}
