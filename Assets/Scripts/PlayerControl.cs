@@ -14,25 +14,18 @@ public class PlayerControl : MonoBehaviour, IPunObservable
     [SerializeField] private Sprite _otherPlayerSprite;
     [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] MoveBehaviour _moveBehaviour;
-    [SerializeField] private IWeapon _weapon;
-    [SerializeField] private Transform _pointer;
-    private ShurikenPoolObject _shurikenPool;
+    [SerializeField] private WeaponBehaviour _weaponBehaviour;
+    [SerializeField] private ShootBehaviour _shootBehaviour;
+    [SerializeField] private float _timeReloadShot;
+    private float _timeBetweenShots;
 
     private void Start()
-    {
-        _shurikenPool = GameObject.Find("GameMainManager").GetComponent<ShurikenPoolObject>();
-
+    { 
         if (!_photonView.IsMine)
         {
             _spriteRenderer.sprite = _otherPlayerSprite;
         }
  
-    }
-
-
-    private void Update()
-    {
-
     }
 
     void FixedUpdate()
@@ -42,17 +35,29 @@ public class PlayerControl : MonoBehaviour, IPunObservable
             if (ControlTypeValue == ControlType.Android)
             {
                 _moveBehaviour.MoveJoystick();
+                _weaponBehaviour.FollowingAndroid();
+                if (_weaponBehaviour.TouchJoystick())
+                {
+                    if (_timeBetweenShots <= 0)
+                    {
+                        _shootBehaviour.ThrowShuriken();
+                        _timeBetweenShots = _timeReloadShot;
+                    }
+                    else _timeBetweenShots -= Time.deltaTime;
+                }
             }
             
             else if (ControlTypeValue == ControlType.PC)
             {
                 _moveBehaviour.MovePC();
+                _weaponBehaviour.FollowingPC();
+                if (Input.GetMouseButtonDown(0))
+                {
+                    _shootBehaviour.ThrowShuriken();
+                }
             }
         }
-        if (Input.GetMouseButtonDown(0))
-        {
-            Fire();
-        }
+        
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -65,13 +70,6 @@ public class PlayerControl : MonoBehaviour, IPunObservable
             {
                 _moveBehaviour.DirectionLook = (bool) stream.ReceiveNext();
             }
-    }
-
-    public void Fire()
-    {
-        Shuriken Shuriken = _shurikenPool.CreateShuriken();
-        Shuriken.transform.position = _pointer.transform.position;
-        Shuriken.transform.rotation = _pointer.transform.rotation; // что бы повороты пойнтора тоже учитывались
     }
 }
 
