@@ -11,17 +11,15 @@ public class MoveBehaviour : MonoBehaviour
     [SerializeField] private SpriteRenderer _spriteRenderer;
     private Vector2 _moveInput;
     private float _speedMove = 5f;
-    private SetActiveJoystick _setActiveJoystick;
 
     private void Awake()
     {
         Joystick = GameObject.FindGameObjectWithTag("Joystick").GetComponent<FixedJoystick>();
-        _setActiveJoystick = GameObject.Find("Joystick").GetComponent<SetActiveJoystick>();
     }
 
     public void MoveJoystick()
     {
-        _setActiveJoystick.JoystickSetActive(true);
+        Joystick.gameObject.SetActive(true);
         _moveInput = new Vector2 (Joystick.Horizontal, Joystick.Vertical);
         _rigidbodyPlayer.MovePosition (_rigidbodyPlayer.position + _moveInput.normalized * _speedMove * Time.deltaTime);
 
@@ -32,7 +30,7 @@ public class MoveBehaviour : MonoBehaviour
 
     public void MovePC()
     {
-        _setActiveJoystick.JoystickSetActive(false);
+        Joystick.gameObject.SetActive(false);
         _moveInput = new Vector2 (Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         _rigidbodyPlayer.MovePosition(_rigidbodyPlayer.position + _moveInput.normalized * _speedMove * Time.deltaTime);
 
