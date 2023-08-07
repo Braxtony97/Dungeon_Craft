@@ -14,10 +14,19 @@ public class PlayerControl : MonoBehaviour, IPunObservable
     [SerializeField] private Sprite _otherPlayerSprite;
     [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] MoveBehaviour _moveBehaviour;
+    [SerializeField] private IWeapon _weapon;
+    [SerializeField] private Transform _pointer;
+    private ShurikenPoolObject _shurikenPool;
 
     private void Start()
     {
-        if (!_photonView.IsMine) _spriteRenderer.sprite = _otherPlayerSprite;
+        _shurikenPool = GameObject.Find("GameMainManager").GetComponent<ShurikenPoolObject>();
+
+        if (!_photonView.IsMine)
+        {
+            _spriteRenderer.sprite = _otherPlayerSprite;
+        }
+ 
     }
 
 
@@ -40,6 +49,10 @@ public class PlayerControl : MonoBehaviour, IPunObservable
                 _moveBehaviour.MovePC();
             }
         }
+        if (Input.GetMouseButtonDown(0))
+        {
+            Fire();
+        }
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -52,6 +65,13 @@ public class PlayerControl : MonoBehaviour, IPunObservable
             {
                 _moveBehaviour.DirectionLook = (bool) stream.ReceiveNext();
             }
+    }
+
+    public void Fire()
+    {
+        Shuriken Shuriken = _shurikenPool.CreateShuriken();
+        Shuriken.transform.position = _pointer.transform.position;
+        Shuriken.transform.rotation = _pointer.transform.rotation; // что бы повороты пойнтора тоже учитывались
     }
 }
 
