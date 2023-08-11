@@ -15,7 +15,7 @@ public class MoveBehaviour : MonoBehaviour
     private void Awake()
     {
         _joystick = GameObject.FindGameObjectWithTag("Joystick").GetComponent<FixedJoystick>();
-    }
+    } 
 
     public void MoveJoystick()
     {
