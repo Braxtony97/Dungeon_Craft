@@ -13,33 +13,34 @@ public class PlayerControl : MonoBehaviour, IPunObservable
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private Sprite _otherPlayerSprite;
     [SerializeField] private Rigidbody2D _rigidbody;
-    [SerializeField] MoveBehaviour _moveBehaviour;
+    [SerializeField] private MoveBehaviour _moveBehaviour;
     [SerializeField] private WeaponBehaviour _weaponBehaviour;
     [SerializeField] private ShootBehaviour _shootBehaviour;
     [SerializeField] private float _timeReloadShot;
     private float _timeBetweenShots;
 
+    [SerializeField] private GameObject _shurikenPrefab;
+
     private void Start()
     { 
-        if (!_photonView.IsMine)
-        {
-            _spriteRenderer.sprite = _otherPlayerSprite;
-        }
- 
+        if (!_photonView.IsMine) _spriteRenderer.sprite = _otherPlayerSprite;
     }
 
     void FixedUpdate()
     {
         if (_photonView.IsMine )
         {
+            
             if (ControlTypeValue == ControlType.Android)
             {
                 _moveBehaviour.MoveJoystick();
                 _weaponBehaviour.FollowingAndroid();
+
                 if (_weaponBehaviour.TouchJoystick())
                 {
                     if (_timeBetweenShots <= 0)
                     {
+                        Debug.Log("Вызвали метод ThrowShuriken");
                         _shootBehaviour.ThrowShuriken();
                         _timeBetweenShots = _timeReloadShot;
                     }
@@ -64,7 +65,7 @@ public class PlayerControl : MonoBehaviour, IPunObservable
     {
             if (stream.IsWriting) 
             {
-                stream.SendNext(_moveBehaviour.DirectionLook); 
+                stream.SendNext(_moveBehaviour.DirectionLook);
             }
             else if (stream.IsReading) 
             {

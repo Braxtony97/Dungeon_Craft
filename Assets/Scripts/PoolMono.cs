@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,14 +9,15 @@ public class PoolMono<T> where T : MonoBehaviour
     public Transform Container { get; set; } 
     public T _objectPrefab { get; }
 
-    private List<T> _pool; 
+    private List<T> _pool;
+    private Transform _position;
+    private Transform _rotation;
 
-    public PoolMono(T _objectPrefab, int count, Transform container)
+    public PoolMono(T ObjectPrefab, int count, Transform container)
     {
-        this._objectPrefab = _objectPrefab;
+        _objectPrefab = ObjectPrefab;
         Container = container;
-        CreatePool(count); 
-
+        CreatePool(count);
     }
 
     private void CreatePool(int count)
@@ -28,10 +30,13 @@ public class PoolMono<T> where T : MonoBehaviour
 
     private T CreateObject(bool IsActiveByDefolt = false) 
     {
-        var createdObject = Object.Instantiate(_objectPrefab, Container); 
-        createdObject.gameObject.SetActive(IsActiveByDefolt); 
-        _pool.Add(createdObject); 
-        return createdObject;
+        //var createdObject = Object.Instantiate(_objectPrefab, Container); 
+        var createdObject = PhotonNetwork.Instantiate(_objectPrefab.name, Vector3.zero, Quaternion.identity);
+        createdObject.transform.parent = Container;
+        createdObject.gameObject.SetActive(IsActiveByDefolt);
+        T component = createdObject.GetComponent<T>();
+        _pool.Add(component);
+        return component;
     }
 
     public bool HasFreeElement(out T element)  
@@ -54,6 +59,7 @@ public class PoolMono<T> where T : MonoBehaviour
     {
         if (HasFreeElement(out var element)) 
         {
+            Debug.Log("Вернулом элемент");
             return element;
         }
 
