@@ -15,7 +15,6 @@ public class ShootBehaviour : MonoBehaviourPunCallbacks
     }
     public void ThrowShuriken()
     {
-        Debug.Log("Стреляем");
         GameObject Shuriken = _shurikenPool.CreateShuriken(_pointer, _pointer.transform.rotation);
         /*Shuriken.transform.position = _pointer.transform.position;
         Shuriken.transform.rotation = _pointer.transform.rotation; // что бы повороты пойнтора тоже учитывались */

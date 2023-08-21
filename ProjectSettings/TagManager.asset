@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Joystick
   - JoystickShoot
+  - Circle
   layers:
   - Default
   - TransparentFX

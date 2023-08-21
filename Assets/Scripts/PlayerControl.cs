@@ -40,7 +40,6 @@ public class PlayerControl : MonoBehaviour, IPunObservable
                 {
                     if (_timeBetweenShots <= 0)
                     {
-                        Debug.Log("Вызвали метод ThrowShuriken");
                         _shootBehaviour.ThrowShuriken();
                         _timeBetweenShots = _timeReloadShot;
                     }
