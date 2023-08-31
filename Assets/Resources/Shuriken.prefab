@@ -102,6 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _textUI: {fileID: 0}
+  _photonViewBullet: {fileID: 3354924860993410823}
 --- !u!114 &3354924860993410823
 MonoBehaviour:
   m_ObjectHideFlags: 0
