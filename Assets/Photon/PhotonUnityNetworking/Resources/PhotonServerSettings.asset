@@ -43,6 +43,8 @@ MonoBehaviour:
   - Deactivate
   - Activate
   - OnTriggerEnter
+  - <OnTriggerEnter2D>g__UpdateHealth|7_0
+  - ChangeHealth
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ public class Health : MonoBehaviour
 
     [SerializeField, Range(0, 100)] private int _maxHealth = 100;
     [SerializeField] private HealthBar _healthBar;
+    [SerializeField] private PhotonView _photonView;
 
     private int _currentHealth;
 
@@ -18,18 +20,11 @@ public class Health : MonoBehaviour
         _currentHealth = _maxHealth;
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            ChangeHealth(-10);
-            Debug.Log(_currentHealth);
-        }
-    }
-
-    private void ChangeHealth (int value)
+    [PunRPC]
+    public void ChangeHealth (int value)
     {
         _currentHealth += value;
+        Debug.Log(_currentHealth);
 
         if (_currentHealth <= 0)
         {
